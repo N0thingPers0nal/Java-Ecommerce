@@ -9,5 +9,9 @@ public class FileUtil {
             credentialFile=new File("src/main/java/org/example/controller/assets/credentials.csv");
         return credentialFile;
     }
+    public static String getFilePath(){
+        return "src/main/java/org/example/controller/assets/";
+    }
+
 
 }

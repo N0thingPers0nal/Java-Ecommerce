@@ -5,18 +5,27 @@ import org.example.utils.AppException;
 import java.sql.Timestamp;
 
 public class Product {
-    private Timestamp id;
+    private int id;
     private String title;
     private String desc;
     private double price;
     private int stocks;
-    private Category categoryName;
+    private int categoryId;
 
-    public Timestamp getId() {
+    public Product(int id, String title, String desc, double price, int stocks, int categoryId) {
+        this.id = id;
+        this.title = title;
+        this.desc = desc;
+        this.price = price;
+        this.stocks = stocks;
+        this.categoryId = categoryId;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Timestamp id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,12 +64,12 @@ public class Product {
         this.stocks = stocks;
     }
 
-    public Category getCategoryName() {
-        return categoryName;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(Category categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(String categoryName) {
+        this.categoryId = categoryId;
     }
 
 

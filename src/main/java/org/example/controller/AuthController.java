@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
 import static org.example.utils.AppInput.enterInt;
 import static org.example.utils.AppInput.enterString;
 import static org.example.utils.FileUtil.getCredentialFile;
@@ -33,7 +34,7 @@ public class AuthController implements IAuthController {
 
     public AuthController(AppController appController) {
         this.appController = appController;
-        homeController = new HomeController();
+        homeController = new HomeController(this);
         loginPage = new LoginPage();
         registerPage = new RegisterPage();
     }
@@ -88,8 +89,8 @@ public class AuthController implements IAuthController {
                 String[] userArr = sc.next().split(",");
                 if (email.equals(userArr[2]) && password.equals(userArr[3])) {
                     User user = new User();
-                    user.setId(1);
-                    user.setName("user");
+                    user.setId(parseInt(userArr[0]));
+                    user.setName(userArr[1]);
                     user.setEmail(email);
                     user.setPassword(password);
 //                    println(userArr[0]);
@@ -140,7 +141,7 @@ public class AuthController implements IAuthController {
 
     @Override
     public void logout() {
- 
+
 
     }
 }

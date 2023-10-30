@@ -1,6 +1,5 @@
 package org.example.models;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class User {
@@ -11,6 +10,17 @@ public class User {
     private Cart userCart;
     private ArrayList<Order> userOrders;
     private Role role;
+
+    public User(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+    public User() {
+    }
+
+
 
     public Cart getUserCart() {
         return userCart;

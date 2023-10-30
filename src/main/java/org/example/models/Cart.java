@@ -5,16 +5,13 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Cart {
-    private Timestamp id;
+    private User user;
 
     private ArrayList<CartProducts> cartProducts;
-
-    public Timestamp getId() {
-        return id;
-    }
-
-    public void setId(Timestamp id) {
-        this.id = id;
+public Cart(){}
+    public Cart(User user, ArrayList<CartProducts> cartProducts) {
+    this.user=user;
+    this.cartProducts=cartProducts;
     }
 
     public ArrayList<CartProducts> getCartProducts() {
@@ -23,5 +20,13 @@ public class Cart {
 
     public void setCartProducts(ArrayList<CartProducts> cartProducts) {
         this.cartProducts = cartProducts;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

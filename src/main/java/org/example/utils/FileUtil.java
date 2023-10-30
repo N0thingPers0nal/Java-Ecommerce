@@ -13,5 +13,4 @@ public class FileUtil {
         return "src/main/java/org/example/controller/assets/";
     }
 
-
 }

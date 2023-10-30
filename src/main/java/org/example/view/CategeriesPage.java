@@ -35,4 +35,9 @@ public class CategeriesPage {
         }
 
     }
+    public void categoryNotFound(){
+        println(StringUtil.CATEGORY_NOT_FOUND);
+        println(StringUtil.BACKFROMPRODUCTS);
+        println(StringUtil.DOT);
+    }
 }

@@ -6,6 +6,11 @@ public class CartProducts {
     private Product product;
     private int count;
 
+    public CartProducts(Product product, int count) {
+        this.product = product;
+        this.count = count;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -21,4 +26,6 @@ public class CartProducts {
     public void setCount(int count) {
         this.count = count;
     }
+
+
 }

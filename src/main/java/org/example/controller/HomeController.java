@@ -3,7 +3,7 @@ package org.example.controller;
 import org.example.controller.impl.IHomeController;
 import org.example.utils.AppException;
 import org.example.utils.StringUtil;
-import org.example.view.CategeriesPage;
+import org.example.utils.UserUtil;
 import org.example.view.HomePage;
 
 import static org.example.utils.AppInput.enterInt;
@@ -14,12 +14,16 @@ public class HomeController implements IHomeController {
     private final AuthController authController;
     private final CategoriesController categoriesController;
     private final ProductController productController;
+    private final CartController cartController;
+    private final OrderController orderController;
 
     public HomeController(AuthController authController) {
         homePage = new HomePage();
-        this.authController=authController;
-        categoriesController=new CategoriesController(this);
-        productController=new ProductController(this);
+        this.authController = authController;
+        categoriesController = new CategoriesController(this);
+        productController = new ProductController(this);
+        cartController = new CartController(this);
+        orderController = new OrderController(this);
     }
 
     @Override
@@ -29,13 +33,13 @@ public class HomeController implements IHomeController {
         try {
             choice = enterInt(StringUtil.CHOICE);
             if (choice == 1) {
-                categoriesController.printCatogries();
+                categoriesController.showCatogries();
             } else if (choice == 2) {
                 productController.showProducts(0);
             } else if (choice == 3) {
-
+                cartController.showCart();
             } else if (choice == 4) {
-
+                orderController.showOrders();
             } else if (choice == 5) {
                 logout();
             } else {
@@ -52,11 +56,11 @@ public class HomeController implements IHomeController {
 
     @Override
     public void logout() {
-
         try {
             homePage.logoutSuccess();
+            UserUtil.setLoggedUser(null);
             Thread.sleep(500);
-            System.exit(0);
+            authController.authServ();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

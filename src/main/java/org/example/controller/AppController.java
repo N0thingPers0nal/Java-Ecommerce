@@ -23,7 +23,6 @@ public class AppController implements IAppController {
     }
     @Override
     public void init() {
-
         welcomePage.welcome();
         authController.authServ();
     }

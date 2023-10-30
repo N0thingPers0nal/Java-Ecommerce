@@ -4,27 +4,27 @@ import org.example.controller.impl.IAuthController;
 import org.example.models.Role;
 import org.example.models.User;
 import org.example.utils.AppException;
+import org.example.utils.HistoryUtils;
 import org.example.utils.StringUtil;
-import org.example.utils.Utils;
-import org.example.view.HomePage;
 import org.example.view.LoginPage;
 import org.example.view.RegisterPage;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 import static org.example.utils.AppInput.enterInt;
 import static org.example.utils.AppInput.enterString;
 import static org.example.utils.FileUtil.getCredentialFile;
+import static org.example.utils.FileUtil.getFilePath;
+import static org.example.utils.UserUtil.setLoggedUser;
 import static org.example.utils.Utils.print;
 import static org.example.utils.Utils.println;
 
 public class AuthController implements IAuthController {
-    private static int regId=3;
+    private static int regId = HistoryUtils.userId() + 1;
 
     private final AppController appController;
     private final HomeController homeController;
@@ -49,6 +49,8 @@ public class AuthController implements IAuthController {
                 register();
             } else if (choice == 2) {
                 login();
+            } else if (choice == 3) {
+                System.exit(0);
             } else {
                 invalid(new AppException(StringUtil.INVALID));
             }
@@ -75,6 +77,7 @@ public class AuthController implements IAuthController {
             authServ();
         } else {
             loginPage.success();
+            setLoggedUser(user);
             homeController.menu();
 //            homePage.menuProducts();
         }
@@ -85,7 +88,6 @@ public class AuthController implements IAuthController {
         try {
             Scanner sc = new Scanner(getCredentialFile());
             while (sc.hasNext()) {
-//                    String line=sc.next();
                 String[] userArr = sc.next().split(",");
                 if (email.equals(userArr[2]) && password.equals(userArr[3])) {
                     User user = new User();
@@ -93,13 +95,9 @@ public class AuthController implements IAuthController {
                     user.setName(userArr[1]);
                     user.setEmail(email);
                     user.setPassword(password);
-//                    println(userArr[0]);
-////                    println(line);
-//                    println(userArr[1]);
-                    if(user.getName().equals("admin")){
+                    if (user.getName().equals("admin")) {
                         user.setRole(Role.ADMIN);
-                    }
-                    else {
+                    } else {
                         user.setRole(Role.USER);
                     }
                     return user;
@@ -121,17 +119,14 @@ public class AuthController implements IAuthController {
         confirm_password = enterString(StringUtil.CONFIRM_PASSWORD);
         if (password.equals(confirm_password)) {
             try {
-                FileWriter csvWriter=new FileWriter(getCredentialFile(),true);
-                csvWriter.append("\n"+regId+","+name+","+email+","+password);
-//                csvWriter.append(name);
-//                csvWriter.append(email);
-//                csvWriter.append(password);
+                FileWriter csvWriter = new FileWriter(getFilePath() + "credentials.csv", true);
+                csvWriter.append(regId + "," + name + "," + email + "," + password + "\n");
                 csvWriter.flush();
                 csvWriter.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            regId+=1;
+            regId += 1;
             registerPage.success();
         } else {
             registerPage.fail();
@@ -141,7 +136,5 @@ public class AuthController implements IAuthController {
 
     @Override
     public void logout() {
-
-
     }
 }

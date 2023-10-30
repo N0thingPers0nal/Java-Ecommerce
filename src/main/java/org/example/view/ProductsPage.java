@@ -4,14 +4,9 @@ import org.example.models.Product;
 import org.example.utils.ReadFilesUtils;
 import org.example.utils.StringUtil;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
-import static org.example.utils.FileUtil.getFilePath;
-import static org.example.utils.ReadFilesUtils.getProductArr;
+import java.util.ArrayList;
+
 import static org.example.utils.Utils.print;
 import static org.example.utils.Utils.println;
 
@@ -24,10 +19,12 @@ public class ProductsPage {
         println(StringUtil.PRODUCTS);
     }
     public void viewProduct(ArrayList<Product> products) {
+        int i=1;
         for (Product product :products) {
             println("." + StringUtil.TAB + product.getId() + ". " + product.getTitle() + "\t" + product.getDesc() + "\tRs. " + product.getPrice() + "\t" + product.getStocks() + StringUtil.TAB + ".");
         }
         println(StringUtil.BACKFROMPRODUCTS);
+        println(StringUtil.DOT);
 //        try {
 //            Scanner sc = new Scanner(new File(getFilePath() + "products.csv"));
 //            while (sc.hasNext()) {
@@ -57,5 +54,10 @@ public class ProductsPage {
 //        } catch (FileNotFoundException e) {
 //            throw new RuntimeException(e);
 //        }
+    }
+
+    public void successToCart(String product){
+
+        println(product+" "+StringUtil.ADD_TO_CART);
     }
 }

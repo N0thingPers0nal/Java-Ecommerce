@@ -5,17 +5,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Order {
-    private Timestamp id;
+    private int id;
     private Date date;
     private ArrayList<Cart> cart;
 
-    public Timestamp getId() {
-        return id;
-    }
 
-    public void setId(Timestamp id) {
-        this.id = id;
-    }
 
     public Date getDate() {
         return date;
@@ -33,4 +27,11 @@ public class Order {
         this.cart = cart;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

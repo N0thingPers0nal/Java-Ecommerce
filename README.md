@@ -55,8 +55,8 @@ Steps used and challenges faced to build this application:-
 	-> Currently working on it
  
  
-Working on the following sections and upcoming
-----------------------------------------------
+Working on the following sections and upcomings
+-----------------------------------------------
     1. User
 	 - Trying to restore the cart details of the user(unplaced orders).
 	 - Delete cart product.
